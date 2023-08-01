@@ -16,7 +16,7 @@ namespace ORM_Dapper
         }
         public Product GetProduct(int id)
         {
-            return _conn.QuerySingle<Product>("SELECT * FROM products WHERE ProductId = @id;", new { id });
+            return _conn.QuerySingle<Product>("SELECT * FROM products WHERE ProductId = @id;", new { id = id });
         }
         public void UpdateProduct(Product product)
         {
@@ -25,7 +25,7 @@ namespace ORM_Dapper
                 "Price = @price, " +
                 "CategoryId = @catID, " +
                 "OnSale = @onSale, " +
-                "StockLevel = @stock" +
+                "StockLevel = @stock " +
                 "WHERE ProductID = @id;",
                 new
                 {
@@ -33,7 +33,8 @@ namespace ORM_Dapper
                     price = product.Price,
                     catID = product.CategoryID,
                     onSale = product.OnSale,
-                    stock = product.StockLevel
+                    stock = product.StockLevel,
+                    id = product.ProductID
                 });
         }
 
